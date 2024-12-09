@@ -76,4 +76,11 @@ Test the application:
 Frontend: http://localhost:3000
 Backend: http://localhost:5000/users
 
+## Step 6: Push the images to dockerhub
 
+Create a file push_to_dockerhub.sh
+
+### To make the script executable
+chmod +x push_to_dockerhub.sh
+
+./push_to_dockerhub.sh
