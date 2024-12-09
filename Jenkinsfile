@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('dockerhub')
         DOCKER_HUB_USERNAME = "nancysilviya"
     }
 
@@ -21,16 +20,16 @@ pipeline {
             }
         }
 
-        stage('Push Docker Images to Docker Hub') {
+        stage('Tag and Push Docker Images') {
             steps {
                 script {
-                    sh """
+                    sh '''
                         echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_USERNAME --password-stdin
                         docker tag mern_app-backend:latest $DOCKER_HUB_USERNAME/mern_app-backend:latest
                         docker tag mern_app-frontend:latest $DOCKER_HUB_USERNAME/mern_app-frontend:latest
                         docker push $DOCKER_HUB_USERNAME/mern_app-backend:latest
                         docker push $DOCKER_HUB_USERNAME/mern_app-frontend:latest
-                    """
+                    '''
                 }
             }
         }
@@ -38,7 +37,10 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 script {
-                    sh 'docker-compose down && docker-compose up -d'
+                    sh '''
+                        docker-compose down
+                        docker-compose up -d
+                    '''
                 }
             }
         }

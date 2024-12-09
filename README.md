@@ -119,3 +119,11 @@ Get password
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 http://localhost:8080
+
+Add Jenkins User to the Docker Group
+
+sudo usermod -aG docker jenkins
+
+To restart jenkins
+
+sudo systemctl restart jenkins
