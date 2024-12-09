@@ -84,3 +84,32 @@ Create a file push_to_dockerhub.sh
 chmod +x push_to_dockerhub.sh
 
 ./push_to_dockerhub.sh
+
+## Step 7: Jenkins Integration
+sudo apt install openjdk-17-jdk -y
+
+##### Find the Java 17 installation path
+sudo update-alternatives --config java
+
+###### Set the JAVA_HOME variable for Jenkins
+sudo nano /etc/default/jenkins
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+Add Jenkins Repository
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+    /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+    https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+Install Jenkins
+sudo apt update
+sudo apt install jenkins -y
+
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+Get password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+http://localhost:8080
