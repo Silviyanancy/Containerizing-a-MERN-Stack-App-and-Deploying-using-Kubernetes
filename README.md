@@ -63,3 +63,17 @@ use personal_details
 db.users.find().pretty()
 
 Details are added to the database
+
+## Step 5: Dockerization
+
+Dockerfile for frontend, backend, docker-compose file
+
+docker-compose up --build # builds the images and runs the containers
+
+docker ps -a #Shows the running container
+
+Test the application:
+Frontend: http://localhost:3000
+Backend: http://localhost:5000/users
+
+
