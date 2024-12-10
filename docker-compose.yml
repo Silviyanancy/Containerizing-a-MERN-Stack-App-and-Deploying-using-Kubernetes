@@ -39,4 +39,5 @@ networks:
   mern-network:
 
 volumes:
-  mongo-data:
+  backend_data:
+  frontend_data:
