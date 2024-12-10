@@ -167,3 +167,5 @@ Configure ngrok with the AuthToken -> ngrok config add-authtoken <your-authtoken
 Start ngrok  ->ngrok http 8080
 
 Update WebHook -> Add the public URL as payload in github (https://0983-45-62-220-132.ngrok-free.app)
+
+This line is to check if the pipeline is triggered automatically after adding webhook
