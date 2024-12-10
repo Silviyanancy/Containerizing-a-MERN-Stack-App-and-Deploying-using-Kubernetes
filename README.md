@@ -127,3 +127,43 @@ sudo usermod -aG docker jenkins
 To restart jenkins
 
 sudo systemctl restart jenkins
+
+Make changes to docker-compose when automating using jenkins pipeline,
+Use Docker-managed volumes and unique ports to avoid conflicts in multi-user or shared environments like Jenkins.
+
+
+###### Set Up a GitHub Webhook
+
+Go to Manage Jenkins > Manage Plugins >> GitHub Integration Plugin (install).
+
+Configure Your Jenkins Pipeline Job -> Configure -> Build Trigger -> click -> GitHub hook trigger for GITScm polling.
+
+###### Set Up a Webhook in GitHub
+
+Project -> settings -> Add Webhook
+
+Payload URL: http://<your-jenkins-server>/github-webhook/
+Replace <your-jenkins-server> with your Jenkins server’s URL.
+Content type: application/json.
+Events: Select Just the push event.
+
+##### Use ngrok to Expose Jenkins Locally
+
+Install ngrok 
+
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+
+Create ngrok account to get token and login
+
+Obtain Your AuthToken
+
+Configure ngrok with the AuthToken -> ngrok config add-authtoken <your-authtoken>
+
+Start ngrok  ->ngrok http 8080
+
+Update WebHook -> Add the public URL as payload in github (https://0983-45-62-220-132.ngrok-free.app)
