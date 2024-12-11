@@ -94,11 +94,11 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        kubectl apply -f k8s/backend-deployment.yml
-                        kubectl apply -f k8s/frontend-deployment.yml
-                        kubectl apply -f k8s/mongodb-deployment.yml
-                        kubectl apply -f k8s/backend-service.yml
-                        kubectl apply -f k8s/frontend-service.yml
+                        kubectl apply -f backend-deployment.yml
+                        kubectl apply -f frontend-deployment.yml
+                        kubectl apply -f mongodb-deployment.yml
+                        kubectl apply -f backend-service.yml
+                        kubectl apply -f frontend-service.yml
                     '''
                 }
             }
