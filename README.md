@@ -224,13 +224,13 @@ kubectl get deployments
 
 ###### Directory and File Setup for kubeconfig -  Kubernetes setup process and their explanations to help you understand what each command accomplished:
 
-1. Create the .kube Directory for Jenkins
+1. Create the .kube Directory for Jenkins - #Purpose: Create a directory to store the Kubernetes configuration file (config) for the jenkins user.
 
-sudo mkdir -p /var/lib/jenkins/.kube   #Purpose: Create a directory to store the Kubernetes configuration file (config) for the jenkins user.
+sudo mkdir -p /var/lib/jenkins/.kube   
 
-2. Copy the kubeconfig File
+2. Copy the kubeconfig File - # Purpose: Copy the kubeconfig file (stored in nancy's home directory) to the directory accessible by the jenkins user.
 
-sudo cp ~/.kube/config /var/lib/jenkins/.kube/config # Purpose: Copy the kubeconfig file (stored in nancy's home directory) to the directory accessible by the jenkins user.
+sudo cp ~/.kube/config /var/lib/jenkins/.kube/config 
 
 3. Set Permissions for the kubeconfig File - #Purpose: Ensure the jenkins user owns the kubeconfig file and restrict access to only the owner for security.
 
