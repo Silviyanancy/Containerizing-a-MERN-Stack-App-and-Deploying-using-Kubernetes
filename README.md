@@ -272,5 +272,14 @@ kubectl get nodes
 
 ## Step 10. Test the application
 
+Check the Frontend Service
+
+kubectl get svc frontend-service
+
+Access the application --> minikube ip
+
+http://<Minikube-IP>:<NodePort>
+
+Do the same for backend and mongodb
 
 
