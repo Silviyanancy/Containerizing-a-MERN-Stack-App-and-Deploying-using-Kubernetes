@@ -222,5 +222,55 @@ kubectl get pods
 
 kubectl get deployments
 
+###### Directory and File Setup for kubeconfig -  Kubernetes setup process and their explanations to help you understand what each command accomplished:
+
+1. Create the .kube Directory for Jenkins
+
+sudo mkdir -p /var/lib/jenkins/.kube   #Purpose: Create a directory to store the Kubernetes configuration file (config) for the jenkins user.
+
+2. Copy the kubeconfig File
+
+sudo cp ~/.kube/config /var/lib/jenkins/.kube/config # Purpose: Copy the kubeconfig file (stored in nancy's home directory) to the directory accessible by the jenkins user.
+
+3. Set Permissions for the kubeconfig File
+
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
+
+sudo chmod 600 /var/lib/jenkins/.kube/config  #Purpose: Ensure the jenkins user owns the kubeconfig file and restrict access to only the owner for security.
+
+
+####### Adjust Permissions for Minikube Certificates
+
+4. Check Directory Permissions # Purpose: Verify that the parent directories of the Minikube certificates allow sufficient access for the jenkins user.
+
+
+ls -ld /home/nancy
+
+ls -ld /home/nancy/.minikube
+
+ls -ld /home/nancy/.minikube/profiles
+
+5. Grant Execute Permission on Parent Directories #Purpose: Allow the jenkins user to traverse (+x) the directories leading to the Minikube certificate files.
+
+sudo chmod +x /home/nancy
+
+sudo chmod -R +X /home/nancy/.minikube
+
+6. Verify Access to Minikube Certificates #Purpose: Check if the jenkins user can now access the certificate files required for Kubernetes.
+
+sudo -u jenkins ls /home/nancy/.minikube/profiles/minikube
+
+####### Test Kubernetes Access
+7. Switch to the jenkins User - #Purpose: Log in as the jenkins user to ensure all commands are executed in the context of Jenkins.
+
+sudo su - jenkins
+
+######## 8. Verify Kubernetes Connectivity - #Purpose: Confirm that the jenkins user can successfully connect to the Kubernetes cluster and list the nodes.
+
+kubectl get nodes
+
+
+
+
 
 
