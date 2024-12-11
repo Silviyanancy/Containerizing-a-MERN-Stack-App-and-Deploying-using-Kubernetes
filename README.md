@@ -270,7 +270,7 @@ sudo su - jenkins
 kubectl get nodes
 
 
-
+## Step 10. Test the application
 
 
 
