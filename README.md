@@ -132,7 +132,7 @@ Make changes to docker-compose when automating using jenkins pipeline,
 Use Docker-managed volumes and unique ports to avoid conflicts in multi-user or shared environments like Jenkins.
 
 
-###### Set Up a GitHub Webhook
+## Step 8: Set Up a GitHub Webhook
 
 Go to Manage Jenkins > Manage Plugins >> GitHub Integration Plugin (install).
 
@@ -166,6 +166,61 @@ Configure ngrok with the AuthToken -> ngrok config add-authtoken <your-authtoken
 
 Start ngrok  ->ngrok http 8080
 
-Update WebHook -> Add the public URL as payload in github (https://0983-45-62-220-132.ngrok-free.app)
+Update WebHook -> Add the public URL as payload in github (check github)
 
 This line is to check if the pipeline is triggered automatically after adding webhook - Yes the pipeline was triggered automatically.
+
+## Step 9: Setting up kubernetes cluster locally
+
+Install Minikube
+
+sudo apt update
+
+sudo apt install -y curl
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+###### Start Minikube
+
+minikube start
+
+kubectl get nodes #Verify if its running
+
+####### Write Kubernetes Manifests
+Deployment: For backend, frontend, and MongoDB.
+
+Service: To expose the frontend and backend.
+
+Persistent Volume: For MongoDB data.
+
+######## Apply the Manifests
+
+kubectl apply -f backend-deployment.yml
+
+kubectl apply -f frontend-deployment.yml
+
+kubectl apply -f mongodb-deployment.yml
+
+kubectl apply -f backend-service.yml
+
+kubectl apply -f frontend-service.yml
+
+Verify all resources are running::: kubectl get all
+
+
+####### Access the Application
+
+Find the NodePort for the frontend-service:---> kubectl get svc frontend-service
+
+Access the frontend in your browser: Use http://<Node IP>:<NodePort>
+
+Get node IP ---> minikube ip
+
+kubectl get pods
+
+kubectl get deployments
+
+
+
