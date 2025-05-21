@@ -41,12 +41,12 @@ Trigger: Automatically via GitHub Webhooks using Ngrok
 
 ---
 
-## Getting Started (Dev)
+## Getting Started
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/MERN_App.git
-cd MERN_App
+git clone <repo>
+cd <repo>
 
 # Build and start services
 docker-compose up --build
